@@ -1,0 +1,14 @@
+<main class="container">
+<h1 class="page-title">Popular Recipes</h1>
+<div class="recipes-container">
+  <app-recipe-showcase
+    *ngFor="let item of recipes"
+    [routerLink]="['/recipe-detail', item['id']]"
+    [recipeImage]="item['image']"
+    [recipeName]="item['title']"
+    [recipeCookingTime]="item['readyInMinutes']"
+    [recipeRating]="item['aggregateLikes']"
+  >
+  </app-recipe-showcase>
+</div>
+</main>
