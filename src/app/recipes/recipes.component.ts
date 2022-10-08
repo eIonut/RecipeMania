@@ -8,9 +8,7 @@ import {HttpCallsService} from "../http-calls.service";
 })
 export class RecipesComponent implements OnInit {
 
-  public recipeName = "asd";
-  public recipeCooking = 3;
-  public recipeRating = 9;
+
   public recipes: [] = [];
   constructor(private httpService: HttpCallsService) { }
 

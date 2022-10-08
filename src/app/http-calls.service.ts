@@ -19,4 +19,12 @@ export class HttpCallsService {
   public getOneRecipe(id:number){
     return this.http.get<any>(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${environment.API_KEY}`);
   }
+
+  public getInstructionsForRecipe(id:number){
+    return this.http.get<any>(`https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${environment.API_KEY}`);
+  }
+
+  public getSearchRecipe(query:string){
+    return this.http.get<any>(`https://api.spoonacular.com/recipes/complexSearch?query=${query}?apiKey=${environment.API_KEY}&number=99`);
+  }
 }

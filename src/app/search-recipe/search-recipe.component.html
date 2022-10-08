@@ -1,1 +1,5 @@
-<p>search-recipe works!</p>
+<div class="search-recipe">
+  <mat-icon class="search-icon">search</mat-icon>
+  <input #searchInput class="search" type="text" placeholder="Search recipes...">
+  <button (click)="getRecipe(searchInput)" class="search-btn">Search</button>
+</div>

@@ -1,21 +1,72 @@
-<main class="recipe-container">
-  <div class="recipe-description-left-panel">
-    <h1 class="recipe-title">Keto Italian Beef With Cabbage Noodles</h1>
-    <p class="ratings">1719 ratings</p>
+<div class="header"></div>
+<main class="recipe-container" *ngFor="let item of recipeDetails">
+  <div class="d-flex flex-column container">
+ <div class="ready-time">
+    <p class="ready-time-p">READY TIME</p>
+   <div class="d-flex align-items-center" >
+     <mat-icon class="timer-icon">access_time</mat-icon>
+     <p><span class="timer" #timer>{{item.readyInMinutes}}</span> min</p>
+   </div>
+  </div>
+  <div class="recipe-inner-container">
+    <h1 class="recipe-title">{{item.title}}</h1>
+    <div class="d-flex align-items-center rating-container">
+      <mat-icon>star</mat-icon>
+      <mat-icon>star</mat-icon>
+      <mat-icon>star</mat-icon>
+      <mat-icon>star</mat-icon>
+      <mat-icon>star_half</mat-icon>
+      <p class="ratings pb-0">{{item?.aggregateLikes}} ratings</p>
+    </div>
+
     <p class="description">
-      This meal is a gut-filling crowd pleaser! The thinly sliced cabbage acts like “noodles” in this hearty Italian meat sauce. It requires only a little prep work, and is finished within about 30 minutes so there’s no need to slave over the stove for hours! The recipe yields 8 servings which may sound like a lot, but this dish is great to meal prep to keep in the fridge and freezer for future meals!
+      {{item.summary}}
     </p>
     <div class="category-container" >
-      <button *ngFor="let category of categories" class="category-btn">{{category}}</button>
+      <button *ngFor="let dishType of item.dishTypes" class="category-btn">{{dishType}}</button>
     </div>
-  <section class="nutrients-container">
 
-  </section>
+    <div class="nutrients-container">
+
+    </div>
   </div>
-
+  </div>
   <div class="img-container">
-    <img class="recipe-img" src="https://cdn.pixabay.com/photo/2016/02/19/15/46/labrador-retriever-1210559__480.jpg" alt="">
+    <img class="recipe-img" [src]="item.image" alt="">
   </div>
-
 
 </main>
+<section class="ingredients-section" *ngFor="let item of recipeDetails">
+  <h1 class="ingredients-h1">Ingredients</h1>
+  <div class="ingredient-container" *ngFor="let ingredient of item.extendedIngredients; let i = index">
+    <div class="ingredient">
+      <div class="ingredient-info">
+        <p class="ingredient-name">
+          {{ingredient.name | titlecase}}
+        </p>
+        <p class="quantity">{{ingredient?.measures?.us?.amount | number : '1.0-0' }} {{ingredient?.measures?.us?.unitShort}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps-section" *ngFor="let item of recipeInstructions; let i=index">
+  <div class="recipe-steps-container">
+    <h1 class="ingredients-h1">Recipe Steps</h1>
+    <div class="steps-and-timer">
+      <p>steps {{item?.steps?.length}}</p>
+      <span class="delimitator"> | </span>
+      <mat-icon class="timer-icon-steps">access_time</mat-icon>
+
+      <p *ngFor="let item of recipeDetails">
+        {{item.readyInMinutes}} min
+      </p>
+    </div>
+
+  </div>
+
+  <div *ngFor="let steps of item.steps">
+    <p class="step-number">Step {{steps.number}}</p>
+    <p>{{steps.step}}</p>
+  </div>
+</section>
